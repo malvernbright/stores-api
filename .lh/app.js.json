@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1641114247677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1641114646495,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,7 +22,5 @@\n     .then((result) => app.listen(process.env.PORT || 3000, () => { console.log('listening on port: ' + process.env.PORT) }))\n     .catch((err) => console.log(err));\n \n // routes\n-app.get('*', checkUser);\n-app.get('/smoothies', requireAuth, (req, res) => res.render('smoothies'));\n app.use(authRoutes, stocksRoutes);\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1641114247677,
+            "name": "Commit-0",
+            "content": "const express = require('express');\nconst mongoose = require('mongoose');\nconst authRoutes = require('./routes/authRoutes');\nconst stocksRoutes = require('./routes/stocksRoutes');\nconst cookieParser = require('cookie-parser');\nconst { requireAuth, checkUser } = require('./middleware/authMiddleware');\n\nconst app = express();\n\n// middleware\napp.use(express.json());\napp.use(cookieParser());\n\n\n// view engine\n// app.set('view engine', 'ejs');\n\n// database connection\n// const dbURI = 'mongodb://localhost/store-manager';\nconst dbURI = 'mongodb+srv://lazycoder:usatsamwa20@cluster0.zhcie.mongodb.net/stock-store?retryWrites=true&w=majority';\nmongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })\n    .then((result) => app.listen(process.env.PORT || 3000, () => { console.log('listening on port: ' + process.env.PORT) }))\n    .catch((err) => console.log(err));\n\n// routes\napp.get('*', checkUser);\napp.get('/smoothies', requireAuth, (req, res) => res.render('smoothies'));\napp.use(authRoutes, stocksRoutes);"
+        }
+    ]
+}

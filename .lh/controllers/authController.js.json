@@ -1,0 +1,126 @@
+{
+    "sourceFile": "controllers/authController.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 27,
+            "patches": [
+                {
+                    "date": 1641111670278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1641111722751,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,10 @@\n     try {\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n-        res.status(200).json({ user: user._id, token.user });\n+        res.cookie('user', user._id, { httpOnly: true, maxAge: maxAge })\n+        res.status(200).json({ user: user._id, token });\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641111734684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,9 @@\n     try {\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n-        res.cookie('user', user._id, { httpOnly: true, maxAge: maxAge })\n+        res.cookie('user', user._id, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n"
+                },
+                {
+                    "date": 1641111784238,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,9 @@\n     try {\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n-        res.cookie('user', user._id, { httpOnly: true, maxAge: maxAge * 1000 });\n+        res.setHeader('Set-Cookie', user._id);\n         res.status(200).json({ user: user._id, token });\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n"
+                },
+                {
+                    "date": 1641111808586,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,8 @@\n     try {\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n-        res.setHeader('Set-Cookie', user._id);\n         res.status(200).json({ user: user._id, token });\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n"
+                },
+                {
+                    "date": 1641111902998,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,13 +53,15 @@\n }\n \n module.exports.login_post = async(req, res) => {\n     const { email, password } = req.body;\n+\n     try {\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n+        console.log(jwt.values);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641111916935,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n-        console.log(jwt.values);\n+        console.log(jwt);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641111971369,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n-        console.log(jwt);\n+        console.log(jwt.decode);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641111981527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n-        console.log(jwt.decode);\n+        console.log(jwt.decode());\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641111989582,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n-        console.log(jwt.decode());\n+        console.log(jwt.decode(token));\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112029708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n-        console.log(jwt.decode(token));\n+        console.log(jwt.decode(token) === user._id);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112040678,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n-        console.log(jwt.decode(token) === user._id);\n+        console.log(jwt.decode(token) == user._id);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112092062,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,10 @@\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n-        console.log(jwt.decode(token) == user._id);\n+        console.log(`jwt token: ${jwt.decode(token)}`);\n+        console.log(`user: ${user._id}`);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112127609,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n-        console.log(`jwt token: ${jwt.decode(token)}`);\n+        console.log(jwt.decode(token));\n         console.log(`user: ${user._id}`);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n"
+                },
+                {
+                    "date": 1641112150356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n-        console.log(jwt.decode(token));\n+        console.log(jwt.decode(token).id);\n         console.log(`user: ${user._id}`);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n"
+                },
+                {
+                    "date": 1641112171117,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,10 +59,9 @@\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n-        console.log(jwt.decode(token).id);\n-        console.log(`user: ${user._id}`);\n+        console.log(jwt.decode(token).id === user._id);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112192821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n-        console.log(jwt.decode(token).id === user._id);\n+        console.log(jwt.decode(token).id === user._id.toString());\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112210260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n-        console.log(jwt.decode(token).id === user._id.toString());\n+        console.log(jwt.decode(token).id.toString() === user._id.toString());\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112233468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n         const user = await User.login(email, password);\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n-        console.log(jwt.decode(token).id.toString() === user._id.toString());\n+        // console.log(jwt.decode(token).id.toString() === user._id.toString());\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112265048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,8 +60,9 @@\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n         // console.log(jwt.decode(token).id.toString() === user._id.toString());\n+        console.log(cookie);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112298044,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,9 @@\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n         // console.log(jwt.decode(token).id.toString() === user._id.toString());\n-        console.log(cookie);\n+        console.log(req.cookie);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112311664,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,9 @@\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n         // console.log(jwt.decode(token).id.toString() === user._id.toString());\n-        console.log(req.cookie);\n+        console.log(req.cookie());\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112319209,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,9 @@\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n         // console.log(jwt.decode(token).id.toString() === user._id.toString());\n-        console.log(req.cookie());\n+        console.log(req.cookies);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112337904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,9 @@\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n         // console.log(jwt.decode(token).id.toString() === user._id.toString());\n-        console.log(req.cookies);\n+        console.log(req.cookies.jwt);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112399042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,9 @@\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n         // console.log(jwt.decode(token).id.toString() === user._id.toString());\n-        console.log(req.cookies.jwt);\n+        console.log(jwt.decode(req.cookies.jwt));\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112427550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,9 @@\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n         // console.log(jwt.decode(token).id.toString() === user._id.toString());\n-        console.log(jwt.decode(req.cookies.jwt));\n+        console.log(jwt.decode(req.cookies.jwt).id.email);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112449914,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,9 @@\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n         // console.log(jwt.decode(token).id.toString() === user._id.toString());\n-        console.log(jwt.decode(req.cookies.jwt).id.email);\n+        console.log(jwt.decode(req.cookies.jwt).id.user);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641112458283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,9 @@\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n         // console.log(jwt.decode(token).id.toString() === user._id.toString());\n-        console.log(jwt.decode(req.cookies.jwt).id.user);\n+        console.log(jwt.decode(req.cookies.jwt).id);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                }
+            ],
+            "date": 1641111670278,
+            "name": "Commit-0",
+            "content": "const User = require('../models/User');\nconst jwt = require('jsonwebtoken');\n\n\n// Handle errors\nconst handleErrors = (err) => {\n    console.log(err.message, err.code);\n    let errors = { email: '', password: '' };\n\n    // Duplicate error code\n    if (err.code === 11000) {\n        errors.email = 'that email is already in use';\n        return errors;\n    }\n\n    if (err.message === 'incorrect email') {\n        errors.email = 'that email is not registered';\n    }\n\n    if (err.message === 'incorrect password') {\n        errors.password = 'that password is incorrect';\n    }\n\n    // Validation errors\n    if (err.message.includes('user validation failed')) {\n        Object.values(err.errors).forEach(({ properties }) => {\n            errors[properties.path] = properties.message;\n        });\n    }\n    return errors;\n}\n\nconst maxAge = 3 * 24 * 60 * 60;\nconst createToken = (id) => {\n    return jwt.sign({ id }, 'net ninja secret', {\n        expiresIn: maxAge\n    });\n}\n\n\n\nmodule.exports.signup_post = async(req, res) => {\n    const { email, password } = req.body;\n    try {\n        const user = await User.create({ email, password });\n        const token = createToken(user._id);\n        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n        res.status(201).json({ user: user._id, token });\n    } catch (err) {\n        const errors = handleErrors(err);\n        res.status(400).json({ errors });\n    }\n}\n\nmodule.exports.login_post = async(req, res) => {\n    const { email, password } = req.body;\n    try {\n        const user = await User.login(email, password);\n        const token = createToken(user._id);\n        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n        res.status(200).json({ user: user._id, token.user });\n    } catch (error) {\n        const errors = handleErrors(error);\n        res.status(400).json({ errors });\n    }\n}\n\nmodule.exports.logout_get = (req, res) => {\n    res.cookie('jwt', '', { maxAge: 1 });\n    // res.redirect('/');\n}"
+        }
+    ]
+}

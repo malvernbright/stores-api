@@ -1,0 +1,25 @@
+{
+    "name": "stock-management",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "express": "^4.17.1",
+        "express-unless": "^1.0.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.1.4",
+        "mongoose-unique-validator": "^3.0.0",
+        "validator": "^13.7.0"
+    },
+    "scripts": {
+        "start": "node index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "engines": {
+        "node": "16.x"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

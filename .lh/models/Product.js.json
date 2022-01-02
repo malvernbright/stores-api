@@ -1,0 +1,22 @@
+{
+    "sourceFile": "models/Product.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1641112506207,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1641112619319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n const mongoose = require('mongoose');\n \n \n const ProductSchema = new mongoose.Schema({\n-    user: {\n+    owner: {\n         type: String,\n     },\n     name: {\n         type: String,\n"
+                }
+            ],
+            "date": 1641112506207,
+            "name": "Commit-0",
+            "content": "const mongoose = require('mongoose');\n\n\nconst ProductSchema = new mongoose.Schema({\n    user: {\n        type: String,\n    },\n    name: {\n        type: String,\n        required: [true, 'product name is required']\n    },\n    quantityStocked: {\n        type: Number,\n        required: [true, 'quantity stocked is required']\n    },\n    quantityBought: {\n        type: Number,\n        default: 0,\n    },\n    quantityLeft: {\n        type: Number,\n    },\n    dateCreated: {\n        type: Date,\n        default: Date.now()\n    },\n    dateModified: {\n        type: Date,\n        default: Date.now()\n    }\n});\n\nconst Product = mongoose.model('Product', ProductSchema);\n\nmodule.exports = Product;"
+        }
+    ]
+}
