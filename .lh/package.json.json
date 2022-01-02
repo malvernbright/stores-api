@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1641114451524,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1641120660050,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,16 +4,19 @@\n     \"description\": \"\",\n     \"main\": \"app.js\",\n     \"dependencies\": {\n         \"bcrypt\": \"^5.0.1\",\n+        \"compression\": \"^1.7.4\",\n         \"cookie-parser\": \"^1.4.6\",\n         \"express\": \"^4.17.1\",\n+        \"helmet\": \"^4.6.0\",\n         \"jsonwebtoken\": \"^8.5.1\",\n         \"mongoose\": \"^5.9.23\",\n         \"validator\": \"^13.7.0\"\n     },\n     \"engines\": {\n-        \"node\": \"16.x\"\n+        \"node\": \"16.x\",\n+        \"npm\": \"8.x\"\n     },\n     \"scripts\": {\n         \"start\": \"node app.js\",\n         \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\n"
                 }
             ],
             "date": 1641114451524,
