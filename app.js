@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const stocksRoutes = require('./routes/stocksRoutes');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
+const helmet = require('helmet');
+
+
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
 const app = express();
@@ -10,6 +14,8 @@ const app = express();
 // middleware
 app.use(express.json());
 app.use(cookieParser());
+app.use(helmet());
+app.use(compression()); //Compress all routes
 
 
 // view engine

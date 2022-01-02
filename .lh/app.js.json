@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1641114247677,
@@ -12,6 +12,18 @@
                 {
                     "date": 1641114646495,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,7 +22,5 @@\n     .then((result) => app.listen(process.env.PORT || 3000, () => { console.log('listening on port: ' + process.env.PORT) }))\n     .catch((err) => console.log(err));\n \n // routes\n-app.get('*', checkUser);\n-app.get('/smoothies', requireAuth, (req, res) => res.render('smoothies'));\n app.use(authRoutes, stocksRoutes);\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1641120364679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,11 @@\n const mongoose = require('mongoose');\n const authRoutes = require('./routes/authRoutes');\n const stocksRoutes = require('./routes/stocksRoutes');\n const cookieParser = require('cookie-parser');\n+const compression = require('compression');\n+const helmet = require('helmet');\n+\n const { requireAuth, checkUser } = require('./middleware/authMiddleware');\n \n const app = express();\n \n"
+                },
+                {
+                    "date": 1641120394250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,16 +4,18 @@\n const stocksRoutes = require('./routes/stocksRoutes');\n const cookieParser = require('cookie-parser');\n const compression = require('compression');\n const helmet = require('helmet');\n+app.use(compression()); //Compress all routes\n \n const { requireAuth, checkUser } = require('./middleware/authMiddleware');\n \n const app = express();\n \n // middleware\n app.use(express.json());\n app.use(cookieParser());\n+app.use(helmet());\n \n \n // view engine\n // app.set('view engine', 'ejs');\n"
+                },
+                {
+                    "date": 1641120401037,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,18 +4,19 @@\n const stocksRoutes = require('./routes/stocksRoutes');\n const cookieParser = require('cookie-parser');\n const compression = require('compression');\n const helmet = require('helmet');\n-app.use(compression()); //Compress all routes\n \n+\n const { requireAuth, checkUser } = require('./middleware/authMiddleware');\n \n const app = express();\n \n // middleware\n app.use(express.json());\n app.use(cookieParser());\n app.use(helmet());\n+app.use(compression()); //Compress all routes\n \n \n // view engine\n // app.set('view engine', 'ejs');\n"
                 }
             ],
             "date": 1641114247677,
