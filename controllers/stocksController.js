@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports.stocks_get = (req, res) => {
 
-    if (!jwt.decode(req.cookies.jwt) === null) {
+    if (!req.cookies.jwt === null) {
         Product.find({ owner: jwt.decode(req.cookies.jwt).id }, (err, products) => {
             if (err) {
                 res.status(400).json({ error: 'no product found' });
@@ -18,7 +18,7 @@ module.exports.stocks_get = (req, res) => {
 }
 
 module.exports.stocks_get_by_id = (req, res) => {
-    if (!jwt.decode(req.cookies.jwt) === null) {
+    if (!req.cookies.jwt === null) {
         Product.findById({ _id: req.params.id }).then((product) => {
             res.status(200).json({ product });
         });
@@ -26,7 +26,7 @@ module.exports.stocks_get_by_id = (req, res) => {
 }
 
 module.exports.stocks_post = async(req, res) => {
-    if (!jwt.decode(req.cookies.jwt) === null) {
+    if (!req.cookies.jwt === null) {
         // create a product
         const { name, quantityStocked } = req.body;
         try {
@@ -44,7 +44,7 @@ module.exports.stocks_post = async(req, res) => {
 }
 
 module.exports.stock_update = (req, res) => {
-    if (!jwt.decode(req.cookies.jwt) === null) {
+    if (!req.cookies.jwt === null) {
         const { name, quantityBought } = req.body;
         Product.findById({ _id: req.params.id }).then(async(product) => {
             if (product.quantityLeft === 0) {
@@ -81,7 +81,7 @@ module.exports.stock_update = (req, res) => {
 }
 
 module.exports.stock_delete = async(req, res) => {
-    if (!jwt.decode(req.cookies.jwt) === null) {
+    if (!req.cookies.jwt === null) {
         // Delete operation on the product
         try {
             const product = await Product.deleteOne({ _id: req.params.id });
