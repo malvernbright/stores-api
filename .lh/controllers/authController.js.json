@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 27,
+            "activePatchIndex": 28,
             "patches": [
                 {
                     "date": 1641111670278,
@@ -116,6 +116,10 @@
                 {
                     "date": 1641112458283,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,9 @@\n         const token = createToken(user._id);\n         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });\n         res.status(200).json({ user: user._id, token });\n         // console.log(jwt.decode(token).id.toString() === user._id.toString());\n-        console.log(jwt.decode(req.cookies.jwt).id.user);\n+        console.log(jwt.decode(req.cookies.jwt).id);\n     } catch (error) {\n         const errors = handleErrors(error);\n         res.status(400).json({ errors });\n     }\n"
+                },
+                {
+                    "date": 1641116405403,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,9 +63,9 @@\n         // console.log(jwt.decode(token).id.toString() === user._id.toString());\n         console.log(jwt.decode(req.cookies.jwt).id);\n     } catch (error) {\n         const errors = handleErrors(error);\n-        res.status(400).json({ errors });\n+        res.status(400).json({ error });\n     }\n }\n \n module.exports.logout_get = (req, res) => {\n"
                 }
             ],
             "date": 1641111670278,
